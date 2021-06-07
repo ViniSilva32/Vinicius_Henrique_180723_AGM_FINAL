@@ -70,6 +70,5 @@
         android:layout_height="wrap_content"
         android:hint="genero"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="textPersonName" />
 </LinearLayout>

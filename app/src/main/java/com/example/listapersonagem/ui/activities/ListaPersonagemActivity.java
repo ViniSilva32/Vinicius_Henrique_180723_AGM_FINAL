@@ -50,53 +50,53 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         });
     }
     //Volta para o formulario
-    private void abreFormularioSalva() {
+    private void abreFormularioSalva() {    // abre o formulario com as informações salvas
         startActivity(new Intent(this, FormularioPersonagemActivity.class));
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() {     //  resume as informações da lista
         super.onResume();
         atualizaAdapter();
     }
 
-    private void atualizaAdapter() {
+    private void atualizaAdapter() {  //atualiza a lista
         adapter.clear();
         adapter.addAll(dao.todos());
     }
 
-    private void remove(Personagem personagem){
+    private void remove(Personagem personagem){ //remove o personagem
         dao.remove(personagem);
         adapter.remove(personagem);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {   // cria o menu para a agenda
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.activity_lista_personagens_menu, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(MenuItem item) { //seleciona o item ao clicar e segurar sobre ele
         configuraMenu(item);
         return super.onContextItemSelected(item);
     }
-
+    //permite fazer alterações na lista
     private void configuraMenu(MenuItem item) {
         int itemID = item.getItemId();
         if(itemID == R.id.activity_lista_personagem_menu_remover){
             new AlertDialog.Builder(this)
-                    .setTitle("Removendo Personagem")
-                    .setMessage("Tem certeza que deseja remover?")
+                    .setTitle("Removendo Personagem")      // mensagem de ação
+                    .setMessage("Tem certeza que deseja remover?")  //mensagem de confirmação
                     .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                             Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
-                            remove(personagemEscolhido);
+                            remove(personagemEscolhido);        // ao clicar e segurar, da a opção de deletar o personagem da lista
                         }
                     })
-                    .setNegativeButton("Não",null)
+                    .setNegativeButton("Não",null)  // se o usuario clicar em não deletar, ele mantem o personagem na lista
                     .show();
         }
     }

@@ -31,9 +31,13 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoAltura;
     //adiciona o nascimento
     private EditText campoNascimento;
+    //campo para salvar o numero de telefone
     private EditText campoTelefone;
+    //campo para salvar o RG
     private EditText campoRG;
+    //campo para salvar o CEP
     private EditText campoCEP;
+    //Campo para salvar o CEP
     private EditText campoGenero;
     //salva as informações inseridas pelo usuario
     private final PersonagemDAO dao = new PersonagemDAO();
@@ -83,7 +87,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     }
 
     private void preencherCampos() {
-        //preenche os campos Nome, Altura, Nascimento
+        //preenche os campos Nome, Altura, Nascimento, telefone, RG, CEP e genero
         campoNome.setText(personagem.getNome());
         campoAltura.setText(personagem.getAltura());
         campoNascimento.setText(personagem.getNascimento());
@@ -96,7 +100,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private void configuraBotaoSalvar() {
         //adicionando ações no botão ao clicar nele
         Button botaoSalvar = findViewById(R.id.button_salvar);
-
+        //Botão salvar as informações e alterações
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
 
             /*Salvando as informações*/
@@ -105,7 +109,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
             }
         });
     }
-
+    //metodo para finalizar o formulario
     private void finalizaFormulario() {
         preenchePersonagem();
         if (personagem.idvalido()) {
@@ -128,24 +132,24 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         campoGenero = findViewById(R.id.editTextgenero);
 
 
-        //limita a quantidade de caracteres e os separa por virgula ","
+        //mascara para altura
         SimpleMaskFormatter smfAltura = new SimpleMaskFormatter ("N,NN");
         MaskTextWatcher mtwAltura = new MaskTextWatcher(campoAltura, smfAltura);
         campoAltura.addTextChangedListener(mtwAltura);
 
-        //limita a quantidade de caracteres e os separa por barras "/"
+        //mascara para data
         SimpleMaskFormatter smfNascimento = new SimpleMaskFormatter ("NN/NN/NNNN");
         MaskTextWatcher mtwNascimento = new MaskTextWatcher(campoNascimento, smfNascimento);
         campoNascimento.addTextChangedListener(mtwNascimento);
-
+        //mascara para telefone
         SimpleMaskFormatter smfTelefone = new SimpleMaskFormatter ("(NN)NNNNN-NNNN)");
         MaskTextWatcher mtwTelefone = new MaskTextWatcher(campoTelefone, smfTelefone);
         campoTelefone.addTextChangedListener(mtwTelefone);
-
+        //mascara para RG
         SimpleMaskFormatter smfRG = new SimpleMaskFormatter ("NNN.NNN.NNN-NN");
         MaskTextWatcher mtwRG = new MaskTextWatcher(campoRG, smfRG);
         campoRG.addTextChangedListener(mtwRG);
-
+        //mascara para CEP
         SimpleMaskFormatter smfCEP = new SimpleMaskFormatter ("NNNNN-NNN");
         MaskTextWatcher mtwCEP = new MaskTextWatcher(campoCEP, smfCEP);
         campoCEP.addTextChangedListener(mtwCEP);
